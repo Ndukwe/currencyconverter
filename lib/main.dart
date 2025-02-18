@@ -1,10 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 
-void main(){
+void main() {
   runApp(
-    MyApp()
+      MyApp()
   );
 }
 
@@ -13,81 +11,70 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Poppins'
-      ),
-      home: HomePage()
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: CurrencyApp(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class CurrencyApp extends StatefulWidget {
+  const CurrencyApp({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CurrencyApp> createState() => _CurrencyAppState();
 }
 
-class _HomePageState extends State<HomePage> {
-  double currencyRate=0.85;
-  TextEditingController currAmount=TextEditingController();
-  String result='';
-  void convertBrain(double intAmount,double rate ){
-    double convertedAmount=intAmount*rate;
+class _CurrencyAppState extends State<CurrencyApp> {
+  TextEditingController amountCurr=TextEditingController();
+  double exchangeRate=0.0006632;
+  double result=0.0;
+
+  void converterBrain(){
     setState(() {
-      result=convertedAmount.toString();
+      result=double.parse(amountCurr.text)*exchangeRate;
+
     });
   }
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.teal,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('AbokiFx',style: TextStyle(
-                  fontFamily: 'Dancing_Script',
-                  fontSize: 70
-                ),),
-                TextField(
-                  controller: currAmount,
-                  decoration: InputDecoration(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          //  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-                    label: Text(
-                        'Amount'
-                    ),
-                    prefixIcon: Icon(Icons.monetization_on),
-                    border: OutlineInputBorder(
-                    ),
-                    hintText: 'Enter the Amount in Naria'
-                  ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  result.isEmpty?'The converted value show here':'converted :N$result',
-                  style: TextStyle(
-                    fontFamily: 'Poppins'
-                  ),
-                ),
-                ElevatedButton(onPressed: (){
-                  convertBrain(double.parse(currAmount.text),currencyRate);
-                }, child: Text(
-                  'Convert Now'
-                ))
-              ],
+            Text('AbokiFx',style: TextStyle(
+                fontFamily: 'Dancing_Script',
+                fontSize: 30
+            ),),
+            TextField(
+              controller:amountCurr ,
+
+              decoration: InputDecoration(
+                  label: Text('Amount'),
+                  hintText: 'Enter the Naria Amount',
+                  border: OutlineInputBorder()
+
+              ),
+
             ),
-          ),
+            Text(result==0.0?'':'Converted Rate \$${result.toStringAsFixed(2)}',
+              style: TextStyle(
+                  color: Colors.white
+              ),
+            ),
+            ElevatedButton(
+                onPressed: converterBrain,
+                child: Text('Convert Now',style: TextStyle(color: Colors.black54),))
+          ],
         ),
       ),
     );
   }
 }
+
+
 
