@@ -41,35 +41,38 @@ class _CurrencyAppState extends State<CurrencyApp> {
     return Scaffold(
       backgroundColor: Colors.teal,
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          //  crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            //  crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 
-            Text('AbokiFx',style: TextStyle(
-                fontFamily: 'Dancing_Script',
-                fontSize: 30
-            ),),
-            TextField(
-              controller:amountCurr ,
+              Text('AbokiFx',style: TextStyle(
+                  fontFamily: 'Dancing_Script',
+                  fontSize: 30
+              ),),
+              TextField(
+                controller:amountCurr ,
 
-              decoration: InputDecoration(
-                  label: Text('Amount'),
-                  hintText: 'Enter the Naria Amount',
-                  border: OutlineInputBorder()
+                decoration: InputDecoration(
+                    label: Text('Amount'),
+                    hintText: 'Enter the Naria Amount',
+                    border: OutlineInputBorder()
+
+                ),
 
               ),
-
-            ),
-            Text(result==0.0?'':'Converted Rate \$${result.toStringAsFixed(2)}',
-              style: TextStyle(
-                  color: Colors.white
+              Text(result==0.0?'':'Converted Rate \$${result.toStringAsFixed(2)}',
+                style: TextStyle(
+                    color: Colors.white
+                ),
               ),
-            ),
-            ElevatedButton(
-                onPressed: converterBrain,
-                child: Text('Convert Now',style: TextStyle(color: Colors.black54),))
-          ],
+              ElevatedButton(
+                  onPressed: converterBrain,
+                  child: Text('Convert Now',style: TextStyle(color: Colors.black54),))
+            ],
+          ),
         ),
       ),
     );
